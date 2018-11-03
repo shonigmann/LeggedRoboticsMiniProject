@@ -1,35 +1,19 @@
 function [T, V] = eval_energy(q, dq)
 
-x1 = -l1/2*sin(q(1, 1));
-z1 = l1/2*cos(q(1, 1));
-x2 = -l1*sin(q(1, 1))-l2/2*sin(q(2, 1));
-z2 = l1*cos(q(1, 1))-l2/2*cos(q(2, 1));
-x3 = -l1*sin(q(1, 1))+l3/2*sin(q(3, 1));
-z3 = l1*cos(q(1, 1))+l3/2*cos(q(3, 1));
+q1 = q(1);
+q2 = q(2);
+q3 = q(3);
 
-% velocities of masses m1, m2, m3
-dx1 = diff(x1,q(1, 1))*dq(1, 1)+diff(x1,q(2, 1))*dq(2, 1)+diff(x1,q(3, 1))*dq(3, 1);
-dz1 = diff(z1,q(1, 1))*dq(1, 1)+diff(z1,q(2, 1))*dq(2, 1)+diff(z1,q(3, 1))*dq(3, 1);
-dx2 = diff(x2,q(1, 1))*dq(1, 1)+diff(x2,q(2, 1))*dq(2, 1)+diff(x2,q(3, 1))*dq(3, 1);
-dz2 = diff(z2,q(1, 1))*dq(1, 1)+diff(z2,q(2, 1))*dq(2, 1)+diff(z2,q(3, 1))*dq(3, 1);
-dx3 = diff(x3,q(1, 1))*dq(1, 1)+diff(x3,q(2, 1))*dq(2, 1)+diff(x3,q(3, 1))*dq(3, 1);
-dz3 = diff(z3,q(1, 1))*dq(1, 1)+diff(z3,q(2, 1))*dq(2, 1)+diff(z3,q(3, 1))*dq(3, 1);
-% T1, T2, T3: kinetic energies of m1, m2, m3
-T1 = 1/2*m1*(dx1^2+dz1^2);
-T2 = 1/2*m2*(dx2^2+dz2^2);
-T3 = 1/2*m3*(dx3^2+dz3^2); 
+dq1 = dq(1);
+dq2 = dq(2);
+dq3 = dq(3);
 
-% V1, V2, V3: potential energies of m1, m2, m3
-V1 = m1*g*z1;
-V2 = m2*g*z2;
-V3 = m3*g*z3;
+[m1, m2, m3, l1, l2, l3, g] = set_parameters();
+t2 = dq1.^2;
+t3 = l1.^2;
+T = (dq2.^2.*l2.^2.*m2)./8.0+(dq3.^2.*l3.^2.*m3)./8.0+(m1.*t2.*t3)./8.0+(m2.*t2.*t3)./2.0+(m3.*t2.*t3)./2.0-(dq1.*dq2.*l1.*l2.*m2.*cos(q1-q2))./2.0+(dq1.*dq3.*l1.*l3.*m3.*cos(q1-q3))./2.0;
 
-T = T1+T2+T3; % total kinetic energy 
-V = V1+V2+V3; % total potential energy 
-
-T = simplify(T, 'steps', 50);
-V = simplify(V, 'steps', 50);
-
-L = T-V; % Lagrangian
-
+t4 = cos(q1);
+t5 = l1.*t4;
+V = g.*m2.*(t5-(l2.*cos(q2))./2.0)+g.*m3.*(t5+(l3.*cos(q3))./2.0)+(g.*l1.*m1.*t4)./2.0;
 end
