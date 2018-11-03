@@ -60,32 +60,66 @@ for i=1:num_steps
     drawnow;        
     
     [qp,dqp] = impact(q,dq);
-    [Tm,Vm] = eval_energy(q,dq);
-    [Tp,Vp] = eval_energy(qp,dqp);
+    [Tm(i),Vm(i)] = eval_energy(q,dq);
+    [Tp(i),Vp(i)] = eval_energy(qp,dqp);
     
-    energy_before(i) = Tm+Vm;
-    energy_after(i) = Tp+Vp;
+    energy_before(i) = Tm(i)+Vm(i);
+    energy_after(i) = Tp(i)+Vp(i);
+    T_loss(i) = Tm(i)-Tp(i);
+    V_loss(i) = Vm(i)-Vp(i);
     energy_loss(i) = energy_before(i)-energy_after(i);
     
-    q=q+pi/4/num_steps;
+    q=q+pi/4/num_steps*[1,-1,0];
         
 end
 
 figure(2);
-subplot(2,1,1);
-t=1:num_steps;
+subplot(2,3,1);
+t=pi/4*(0:num_steps-1);
+plot(t,Tm);
+hold on;
+plot(t,Tp);
+title('Kinetic Energy');
+xlabel('Angle (rad)');
+ylabel('Kinetic Energy, [J]');
+legend('Before','After');
+
+subplot(2,3,4);
+plot(t,T_loss);
+
+title('Kinetic Energy Loss');
+xlabel('Angle (rad)');
+ylabel('Kinetic Loss, [J]');
+
+subplot(2,3,2);
+plot(t,Vm);
+hold on;
+plot(t,Vp);
+title('Potential Energy');
+xlabel('Angle (rad)');
+ylabel('Potential Energy, [J]');
+legend('Before','After');
+
+subplot(2,3,5);
+plot(t,V_loss);
+
+title('Energy Loss Due to Impact');
+xlabel('Angle (rad)');
+ylabel('Potential Loss, [J]');
+
+subplot(2,3,3);
 plot(t,energy_before);
 hold on;
 plot(t,energy_after);
-title('Energy Before and After Impact');
-xlabel('Sample Number');
+title('Total Energy');
+xlabel('Angle (rad)');
 ylabel('Total Energy, [J]');
 legend('Before','After');
 
-subplot(2,1,2);
+subplot(2,3,6);
 plot(t,energy_loss);
 
-title('Energy Loss Due to Impact');
-xlabel('Sample Number');
-ylabel('Total Energy, [J]');
+title('Total Energy Loss');
+xlabel('Angle (rad)');
+ylabel('Energy Loss, [J]');
 
