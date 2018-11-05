@@ -24,11 +24,8 @@ l2=0.5;
 l3=0.5;
 
 num_steps = 10;
-i=0;
-for alpha=0:pi/(4*num_steps):pi/4-pi/(4*num_steps)
-    q=alpha.*[1,-1,0]';
-    i=i+1;
-    
+
+for i=1:num_steps
     figure(1);
     clf;
     
@@ -42,12 +39,12 @@ for alpha=0:pi/(4*num_steps):pi/4-pi/(4*num_steps)
     z2 = 2*z1-l2/2*cos(q2);
     x3 = 2*x1+l3/2*sin(q3);
     z3 = 2*z1+l3/2*cos(q3);
-    x_h = 2*x1;
-    z_h = 2*z1;
-    x_swf = x_h-l2*sin(q2);
-    z_swf = z_h-l2*cos(q2);
-    x_t = x_h+l3*sin(q3);
-    z_t = z_h+l3*cos(q3);
+x_h = 2*x1;
+z_h = 2*z1;
+x_swf = x_h-l2*sin(q2);
+z_swf = z_h-l2*cos(q2);
+x_t = x_h+l3*sin(q3);
+z_t = z_h+l3*cos(q3);
         
     lw = 2;
     % links
@@ -81,13 +78,13 @@ for alpha=0:pi/(4*num_steps):pi/4-pi/(4*num_steps)
     V_loss(i) = Vm(i)-Vp(i);
     energy_loss(i) = energy_before(i)-energy_after(i);
     
-    %q=q+pi/4/num_steps*[1,-1,0]';
+    q=q+pi/4/num_steps*[1,-1,0]';
         
 end
 
 figure(2);
 subplot(2,3,1);
-t=pi/4*(0:num_steps-1)/num_steps;
+t=pi/4*(0:num_steps-1);
 plot(t,Tm);
 hold on;
 plot(t,Tp);
