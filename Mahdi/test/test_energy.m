@@ -3,18 +3,27 @@
 clc;
 clear; 
 
-ts = 0.001;
+ts = 0.01;
+
+%question 2
+qm = [pi/6,-pi/6,pi/10]';
+dqm = [1,.2,0]';
+
+[qp,dqp] = impact(qm,dqm);
+
+energyLoss = sum(eval_energy(qm,dqm))-sum(eval_energy(qp,dqp))
+[Tm,Vm]=eval_energy(qm,dqm)
+[Tp,Vp]=eval_energy(qp,dqp)
 
 %arbitrary initial conditions:
 q = [0,0,0]';
 dq = [1,.2,0]';
-figure();
 
 l1=0.5;
 l2=0.5;
 l3=0.5;
 
-num_steps = 100;
+num_steps = 10;
 
 for i=1:num_steps
     figure(1);
@@ -117,7 +126,7 @@ ylabel('Total Energy, [J]');
 legend('Before','After');
 
 subplot(2,3,6);
-plot(t,energy_loss);
+plot(t,round(energy_loss,4));
 
 title('Total Energy Loss');
 xlabel('Angle (rad)');
