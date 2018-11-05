@@ -101,11 +101,11 @@ ylabel('Kinetic Energy, [J]');
 legend('Before','After');
 
 subplot(2,3,4);
-plot(t,T_loss);
+plot(t,T_loss./Tm*100);
 
 title('Kinetic Energy Loss');
 xlabel('Angle (rad)');
-ylabel('Kinetic Loss, [J]');
+ylabel('Kinetic Energy Loss, [%]');
 
 subplot(2,3,2);
 plot(t,Vm);
@@ -117,11 +117,11 @@ ylabel('Potential Energy, [J]');
 legend('Before','After');
 
 subplot(2,3,5);
-plot(t,V_loss);
+plot(t,V_loss./Vm*100);
 
 title('Energy Loss Due to Impact');
 xlabel('Angle (rad)');
-ylabel('Potential Loss, [J]');
+ylabel('Potential Energy Loss, [%]');
 
 subplot(2,3,3);
 plot(t,energy_before);
@@ -133,9 +133,9 @@ ylabel('Total Energy, [J]');
 legend('Before','After');
 
 subplot(2,3,6);
-plot(t,round(energy_loss,4));
+plot(t,(energy_loss./energy_before)*100);
 
-title('Total Energy Loss');
+title('Percent Kinetic Energy Loss');
 xlabel('Angle (rad)');
-ylabel('Energy Loss, [J]');
+ylabel('Total Energy Loss, [%]');
 
