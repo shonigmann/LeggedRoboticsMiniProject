@@ -23,7 +23,8 @@ l1=0.5;
 l2=0.5;
 l3=0.5;
 
-num_steps = 10;
+num_steps = 20;
+final_angle = pi/4;
 
 for i=1:num_steps
     figure(1);
@@ -84,13 +85,13 @@ for i=1:num_steps
     V_loss(i) = Vm(i)-Vp(i);
     energy_loss(i) = energy_before(i)-energy_after(i);
     
-    q=i*pi/4/num_steps*[1,-1,0]';
+    q=i*final_angle/num_steps*[1,-1,0]';
         
 end
 
 figure(2);
 subplot(2,3,1);
-t=pi/4*(0:num_steps-1)/num_steps;
+t=final_angle*(0:num_steps-1)/num_steps;
 plot(t,Tm);
 hold on;
 plot(t,Tp);
