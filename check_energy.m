@@ -8,5 +8,4 @@ A_p = eval_A_p(q_p);
 A_m = eval_A_m(q_m);
 dq_p=A_p\A_m*dq_m;
 [T_p, V_p] = eval_energy(q_p, dq_p);
-diff_V=V_p-V_m
-diff_T=T_p-T_m
+energy_difference=eval((V_p+T_p)-(V_m+T_m))
