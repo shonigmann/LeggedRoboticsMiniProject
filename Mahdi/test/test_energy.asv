@@ -29,26 +29,27 @@ for i=1:num_steps
     figure(1);
     clf;
     q1 = q(1,1);
-    q2 = q(2,1);
-    q3 = q(3,1);
+q2 = q(2,1);
+q3 = q(3,1);
 
-    x1 = l1/2*sin(q1);
-    z1 = l1/2*cos(q1);
-    x2 = 2*x1-l2/2*sin(q2);
-    z2 = 2*z1-l2/2*cos(q2);
-    x3 = 2*x1+l3/2*sin(q3);
-    z3 = 2*z1+l3/2*cos(q3);
+x1 = l1/2*sin(q1);
+z1 = l1/2*cos(q1);
+x2 = 2*x1-l2/2*sin(q2);
+z2 = 2*z1-l2/2*cos(q2);
+x3 = 2*x1+l3/2*sin(q3);
+z3 = 2*z1+l3/2*cos(q3);
 
-    x_h = 2*x1;
-    z_h = 2*z1;
-    x_swf = x_h-l2*sin(q2);
-    z_swf = z_h-l2*cos(q2);
-    x_t = x_h+l3*sin(q3);
-    z_t = z_h+l3*cos(q3);
+x_h = 2*x1;
+z_h = 2*z1;
+x_swf = x_h-l2*sin(q2);
+z_swf = z_h-l2*cos(q2);
+x_t = x_h+l3*sin(q3);
+z_t = z_h+l3*cos(q3);
     
     %% 
     % Here plot a schematic of the configuration of three link biped at the
     % generalized coordinate q = [q1, q2, q3]:
+    close all
     lw = 2;
     % links
     % link1
@@ -84,7 +85,7 @@ for i=1:num_steps
     V_loss(i) = Vm(i)-Vp(i);
     energy_loss(i) = energy_before(i)-energy_after(i);
     
-    q=i*pi/4/num_steps*[1,-1,0]';
+    q=i*pi/4/num_steps*[1,1,0]';
         
 end
 

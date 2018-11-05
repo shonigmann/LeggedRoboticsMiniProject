@@ -8,6 +8,7 @@ q3_p = q_p(3);
 [m1, m2, m3, l1, l2, l3, g] = set_parameters();
 m=m1;
 
+
 t2 = l1.^2;
 t3 = q1_p-q2_p;
 t4 = cos(t3);

@@ -15,18 +15,19 @@ q1 = q(1,1);
 q2 = q(2,1);
 q3 = q(3,1);
 
-x1 = -(l1*sin(q1))/2;
-z1 = (l1*cos(q1))/2;
-x2 = - l1*sin(q1) - (l2*sin(q2))/2;
-z2 = l1*cos(q1) - (l2*cos(q2))/2;
-x3 = (l3*sin(q3))/2 - l1*sin(q1);
-z3 = l1*cos(q1) + (l3*cos(q3))/2;
-x_h = -l1*sin(q1);
-z_h = l1*cos(q1);
-x_t = l3*sin(q3) - l1*sin(q1);
-z_t = l1*cos(q1) + l3*cos(q3);
-x_swf = - l1*sin(q1) - l2*sin(q2);
-z_swf = l1*cos(q1) - l2*cos(q2);
+x1 = l1/2*sin(q1);
+z1 = l1/2*cos(q1);
+x2 = 2*x1-l2/2*sin(q2);
+z2 = 2*z1-l2/2*cos(q2);
+x3 = 2*x1+l3/2*sin(q3);
+z3 = 2*z1+l3/2*cos(q3);
+
+x_h = 2*x1;
+z_h = 2*z1;
+x_swf = x_h-l2*sin(q2);
+z_swf = z_h-l2*cos(q2);
+x_t = x_h+l3*sin(q3);
+z_t = z_h+l3*cos(q3);
     
     %% 
     % Here plot a schematic of the configuration of three link biped at the
