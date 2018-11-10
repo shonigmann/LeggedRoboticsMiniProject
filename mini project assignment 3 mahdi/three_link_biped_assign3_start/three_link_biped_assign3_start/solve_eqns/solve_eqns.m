@@ -13,8 +13,8 @@ function sln = solve_eqns(q0, dq0, num_steps)
 h = 0.001; % time step
 tmax = 2; % max time that we allow for a single step
 tspan = 0:h:tmax; % from 0 to tmax with time step h
-q0 = [pi/6; -pi/3; 0];
-dq0 = [0;0;0];
+% q0 = [pi/6; -pi/3; 0];
+% dq0 = [0;0;0];
 y0 = [q0; dq0];
 t0 = 0;
 
@@ -25,21 +25,22 @@ sln.Y = {};
 sln.TE = {};
 sln.YE = {};
 
+options = odeset('RelTol', 1e-5, 'Events', @event_func);
 
 for i = 1:num_steps
-    [T, Y, TE, YE] = % use ode45 to solve the equations of motion (eqns.m)
-   % sln.T{i} = 
-   % sln.Y{i} = 
-   % sln.TE{i} = 
-   % sln.YE{i} = 
+    [T, Y, TE, YE] = ode45(@eqns,tspan,y0,options);% use ode45 to solve the equations of motion (eqns.m)
+    sln.T{i} = T;
+    sln.Y{i} = Y;
+    sln.TE{i} = TE;
+    sln.YE{i} = YE;
     if T(end) == tmax
         break
     end
     
     % Impact map
-    
     t0 = T(end);
-    
+    [q_p,dq_p] = impact(Y(end,1:3)',Y(end,4:6)'); %not sure if this is required?
+    y0 = [q_p;dq_p];
 end
 end
 

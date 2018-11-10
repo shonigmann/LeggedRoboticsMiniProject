@@ -3,8 +3,8 @@ function dy = eqns(t, y)
 % y1 = q1, y2 = q2, y3 = q3, y4 = dq1, y5 = dq2, y6 = dq3
 
 
-u = control(q, dq); % for the moment we set the control outputs to zero
-
+%u = control(q, dq); % for the moment we set the control outputs to zero
+u = control();
 n = 6;   
 dy = zeros(n, 1);
 
