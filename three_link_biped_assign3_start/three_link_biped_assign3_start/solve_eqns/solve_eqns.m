@@ -38,7 +38,7 @@ for i = 1:num_steps
     end
     
     % Impact map
-    t0 = t0+T(end);
+    t0 = T(end);
     [q_p,dq_p] = impact(Y(end,1:3)',Y(end,4:6)'); %not sure if this is required?
     y0 = [q_p;dq_p];
 end
