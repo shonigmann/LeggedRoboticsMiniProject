@@ -12,6 +12,6 @@ A_m = eval_A_m(q_m);
 A_p = eval_A_p(q_p);
 
 % A_p dq_p = A_m dq_m
-dq_p = A_p \ (A_m * dq_m);
+dq_p = (A_p \ (A_m * dq_m));
 
 end

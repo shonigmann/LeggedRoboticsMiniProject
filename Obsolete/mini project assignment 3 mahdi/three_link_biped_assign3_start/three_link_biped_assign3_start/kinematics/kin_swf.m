@@ -16,4 +16,5 @@ z_swf = l1*cos(q1) - l2*cos(q2);
 dx_swf = dq1*l1*cos(q1) - dq2*l2*cos(q2);
 dz_swf = dq2*l2*sin(q2) - dq1*l1*sin(q1);
 
+
 end
