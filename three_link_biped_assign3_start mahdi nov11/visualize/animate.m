@@ -21,10 +21,10 @@ for j = 1:num_steps
         visualize(q,r0);
         hold off
     end
-    pause(3);
+    
     % update r0:
-    [x_swf,z_swf,~,~] = kin_swf(q);
-    r0 = [x_swf;z_swf]; %new position of stance foot in gimbal frame
+    [x_swf,~,~,~] = kin_swf(q);
+    r0 =r0+[x_swf;0]; %new position of stance foot in gimbal frame
 end
 t_anim = toc();
 
@@ -32,7 +32,8 @@ t_anim = toc();
 % the time it takes for MATLAB to animate the simulations (get it from
 % t_anim). How does 'skip' effect this value? what does a real time factor
 % of 1 mean?
-real_time_factor = sln.T{end}(end)/t_anim;% This is only an estimation 
+real_time_factor = sln.T{end}(end)./t_anim; % This is only an estimation 
+real_time_factor
 fprintf('Real time factor:');
 disp(real_time_factor);
 end
