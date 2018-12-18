@@ -15,8 +15,7 @@ M = eval_M(y(1:3));
 B = eval_B();
 G = eval_G(y(1:3));
 C = eval_C(y(1:3), y(4:6));
-dy(1)=y(4);
-dy(2)=y(5);
-dy(3)=y(6);
+
+dy(1:3)=y(4:6);
 dy(4:6) = M\(B*u-G-C*y(4:6,1));
 end

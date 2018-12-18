@@ -11,8 +11,9 @@ function sln = solve_eqns(q0, dq0, num_steps)
 
 % options = ...
 h = 0.001; % time step
-tmax = 2; % max time that we allow for a single step
-tspan = 0:h:tmax; % from 0 to tmax with time step h
+tmax = 1; % max time that we allow for a single step
+t0=0;
+tspan = t0:h:tmax; % from 0 to tmax with time step h
 % q0 = [pi/6; -pi/3; 0];
 % dq0 = [0;0;0];
 y0 = [q0; dq0];
@@ -38,7 +39,7 @@ for i = 1:num_steps
     end
     
     % Impact map
-    t0 = T(end);
+    t0 = t0+T(end);
     [q_p,dq_p] = impact(Y(end,1:3)',Y(end,4:6)'); %not sure if this is required?
     y0 = [q_p;dq_p];
 end
